@@ -1,0 +1,41 @@
+﻿@model List<PettyCashOCR.Models.PettyCashVoucher>
+
+<h2>📄 Petty Cash Voucher List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Voucher No</th>
+            <th>Paid To</th>
+            <th>Date</th>
+            <th>Email</th>
+            <th>Contact No</th>
+            <th>Total Amount</th> <!-- Add this -->
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var voucher in Model)
+        {
+            <tr>
+                <td>@voucher.VoucherNo</td>
+                <td>@voucher.PaidTo</td>
+                <td>@voucher.Date</td>
+                <td>@voucher.Email</td>
+                <td>@voucher.ContactNo</td>
+                <td>
+                    @(voucher.LineItems != null ? voucher.LineItems.Sum(i => i.Amount).ToString("N2") : "0.00")
+                </td>
+
+                <td>
+                    <ul>
+                        @foreach (var item in voucher.LineItems)
+                        {
+                            <li>@item.ItemDate - @item.Description - @item.Amount.ToString("N2")</li>
+                        }
+                    </ul>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Upload Voucher Image";
+}
+
+<h2>Upload Voucher Image</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div style="padding:10px; background-color:#d4edda; color:#155724; margin-bottom:15px;">
+        @TempData["Success"]
+    </div>
+}
+
+<form asp-action="Upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="invoiceImage" required />
+    <button type="submit">Upload</button>
+</form>
