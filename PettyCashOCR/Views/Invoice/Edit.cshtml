@@ -8,167 +8,177 @@
     <table class="voucher-table">
         <thead>
             <tr>
-                <th>Paid To</th>
-                <th>Date</th>
                 <th>Voucher No</th>
-                <th>Email</th>
-                <th>Contact No</th>
+                <th>Claimed By</th>
+                <th>Staff No</th>
+                <th>Department</th>
+                <th>Cost Center</th>
+                <th>Station</th>
+                <th>Date</th>
+                <th>Approved By</th>
+                <th>Received Cash</th>
+                <th>Amount In Words</th>
                 <th>Total Amount</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>@Model.PaidTo</td>
-                <td>@Model.Date</td>
                 <td>@Model.VoucherNo</td>
-                <td>@Model.Email</td>
-                <td>@Model.ContactNo</td>
+                <td>@Model.PaidTo</td>
+                <td>@Model.StaffNo</td>
+                <td>@Model.Department</td>
+                <td>@Model.CostCenter</td>
+                <td>@Model.Station</td>
+                <td>@Model.Date</td>
+                <td>@Model.ApprovedBy</td>
+                <td>@Model.ReceivedCash</td>
+                <td>@Model.AmountInWords</td>
                 <td>@Model.TotalAmount.ToString("N2")</td>
             </tr>
         </tbody>
     </table>
 </div>
 
-<!-- Display Line Items -->
-<h3>📋 Line Items:</h3>
-<table class="line-items-table">
-    <thead>
-        <tr>
-            <th>Date</th>
-            <th>Description</th>
-            <th>Amount</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model.LineItems != null){
-            @foreach (var item in Model.LineItems){
-                Console.WriteLine($"Line Item: {item.ItemDate}, {item.Description}, {item.Amount}");
+<h3>✏️ Edit Voucher</h3>
+<form asp-action="Save" asp-controller="Invoice" method="post" id="voucherForm">
+    @* Hidden ID if needed *@
+    <input type="hidden" name="Id" value="@Model.Id" />
+
+    <div><label>Voucher No</label><input name="VoucherNo" value="@Model.VoucherNo" /></div>
+    <div><label>Claimed By</label><input name="PaidTo" value="@Model.PaidTo" /></div>
+    <div><label>Staff No</label><input name="StaffNo" value="@Model.StaffNo" /></div>
+    <div><label>Department</label><input name="Department" value="@Model.Department" /></div>
+    <div><label>Cost Center</label><input name="CostCenter" value="@Model.CostCenter" /></div>
+    <div><label>Station</label><input name="Station" value="@Model.Station" /></div>
+    <div><label>Date</label><input name="Date" value="@Model.Date" /></div>
+    <div><label>Approved By</label><input name="ApprovedBy" value="@Model.ApprovedBy" /></div>
+    <div><label>Received Cash</label><input name="ReceivedCash" value="@Model.ReceivedCash" /></div>
+    <div><label>Amount In Words</label><input name="AmountInWords" value="@Model.AmountInWords" /></div>
+    <div><label>Total Amount</label><input type="number" step="0.01" name="TotalAmount" value="@Model.TotalAmount" /></div>
+
+    <h4>📋 Line Items</h4>
+    <table id="line-items-table" class="line-items-table">
+        <thead>
+            <tr><th>Description</th><th>Amount</th><th>Action</th></tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.LineItems?.Count; i++)
+            {
                 <tr>
-                    <td>@item.ItemDate</td>
-                    <td>@item.Description</td>
-                    <td>@item.Amount.ToString("N2")</td>
+                    <td><input name="LineItems[@i].Details" value="@Model.LineItems[i].Details" /></td>
+                    <td><input type="number" step="0.01" name="LineItems[@i].Amount" value="@Model.LineItems[i].Amount" /></td>
+                    <td><button type="button" onclick="removeLineItem(this)">Remove</button></td>
                 </tr>
             }
-        }
-    </tbody>
-</table>
+        </tbody>
+    </table>
+    <button type="button" onclick="addLineItem()">Add Line Item</button>
 
-<!-- Editable Fields (Optional) -->
-<h3>Edit Voucher Data:</h3>
-<form asp-action="Save" asp-controller="Invoice" method="post">
-    <div>
-        <label for="PaidTo">Paid To</label>
-        <input type="text" id="PaidTo" name="PaidTo" value="@Model.PaidTo" required />
-    </div>
-
-    <div>
-        <label for="Date">Date</label>
-        <input type="text" id="Date" name="Date" value="@Model.Date" required />
-    </div>
-
-    <div>
-        <label for="VoucherNo">Voucher No</label>
-        <input type="text" id="VoucherNo" name="VoucherNo" value="@Model.VoucherNo" required />
-    </div>
-    <div>
-        <label for="Email">Email</label>
-        <input type="text" id="Email" name="Email" value="@Model.Email" required />
-    </div>
-    <div>
-        <label for="ContactNo">Contact No</label>
-        <input type="text" id="ContactNo" name="ContactNo" value="@Model.ContactNo" required />
-    </div>
-    <div>
-        <label for="ToatalAmount">Toatal Amount</label>
-        
-        <input type="number" id="ToatalAmount" name="ToatalAmount" value="@Model.TotalAmount" step="0.01" required />
-    </div>
-    <div>
-        <h3>Line Items</h3>
-        <table id="line-items-table">
-            <thead>
+    <h4>📋 Budgetery Details</h4>
+    <table id="line-items-table" class="line-items-table">
+        <thead>
+            <tr><th>Account</th>
+                <th>CC</th>
+                <th>Budget</th>
+                <th>Utilized</th>
+                <th>Variance</th>
+                <th>This Payment</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.BudgeteryDetails?.Count; i++)
+            {
                 <tr>
-                    <th>Item Date</th>
-                    <th>Description</th>
-                    <th>Amount</th>
-                    <th>Action</th>
+                    <td><input name="BudgeteryDetails[@i].Account" value="@Model.BudgeteryDetails[i].Account" /></td>
+                    <td><input name="LineItems[@i].CC" value="@Model.BudgeteryDetails[i].CC" /></td>
+                    <td><input type="number" step="0.01" name="BudgeteryDetails[@i].Budget" value="@Model.BudgeteryDetails[i].Budget" /></td>
+                    <td><input type="number" step="0.01" name="BudgeteryDetails[@i].Utilised" value="@Model.BudgeteryDetails[i].Utilised" /></td>
+                    <td><input type="number" step="0.01" name="BudgeteryDetails[@i].Variance" value="@Model.BudgeteryDetails[i].Variance" /></td>
+                    <td><input type="number" step="0.01" name="BudgeteryDetails[@i].ThisPayment" value="@Model.BudgeteryDetails[i].ThisPayment" /></td>
+                    <td><button type="button" onclick="">Remove</button></td>
                 </tr>
-            </thead>
-            <tbody>
-                @if (Model.LineItems != null && Model.LineItems.Any())
-                {
-                    @for (int i = 0; i < Model.LineItems.Count; i++)
-                    {
-                        <tr>
-                            <td>
-                                <input type="hidden" name="LineItems[@i].Id" value="@Model.LineItems[i].Id" />
-                                <input type="text" name="LineItems[@i].ItemDate" value="@Model.LineItems[i].ItemDate" />
-                            </td>
-                            <td>
-                                <input type="text" name="LineItems[@i].Description" value="@Model.LineItems[i].Description" />
-                            </td>
-                            <td>
-                                <input type="number" name="LineItems[@i].Amount" value="@Model.LineItems[i].Amount" step="0.01" />
-                            </td>
-                            <td>
-                                <button type="button" onclick="removeLineItem(this)">Remove</button>
-                            </td>
-                        </tr>
-                    }
+            }
+        </tbody>
+    </table>
 
-                }
-                else
-                {
-                    <tr>
-                        <td colspan="4">No line items found.</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-        <button type="button" onclick="addLineItem()">Add Line Item</button>
-    </div>
 
-    <button id="saveVoucherBtn" class="btn btn-primary">Save Voucher</button>
+    <h4>📋 Accounting Allocation </h4>
+    <table id="line-items-table" class="line-items-table">
+        <thead>
+            <tr>
+                <th>Account</th>
+                <th>CC</th>
+                <th>FLT No</th>
+                <th>ACRFT</th>
+                <th>PROJ</th>
+                <th>Amount</th>
+                <th>Cross Ref</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.AccountingAllocations?.Count; i++)
+            {
+                <tr>
+                    <td><input name="AccountingAllocations[@i].Account" value="@Model.AccountingAllocations[i].Account" /></td>
+                    <td><input name="LineItems[@i].CC" value="@Model.AccountingAllocations[i].CC" /></td>
+                    <td><input type="number" step="0.01" name="AccountingAllocations[@i].FLTNO" value="@Model.AccountingAllocations[i].FLTNO" /></td>
+                    <td><input type="number" step="0.01" name="AccountingAllocations[@i].ACRFT" value="@Model.AccountingAllocations[i].ACRFT" /></td>
+                    <td><input type="number" step="0.01" name="AccountingAllocations[@i].PROJ" value="@Model.AccountingAllocations[i].PROJ" /></td>
+                    <td><input type="number" step="0.01" name="AccountingAllocations[@i].Amount" value="@Model.AccountingAllocations[i].Amount" /></td>
+                    <td><input type="number" step="0.01" name="AccountingAllocations[@i].CrossReference" value="@Model.AccountingAllocations[i].CrossReference" /></td>
+                    <td><input name="AccountingAllocations[@i].Description" value="@Model.AccountingAllocations[i].Description" /></td>
+                    <td><button type="button" onclick="">Remove</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <br />
+    <button type="submit" id="saveVoucherBtn">Save Voucher</button>
 </form>
 
-<!-- Styles -->
 <style>
     .voucher-table, .line-items-table {
         width: 100%;
         border-collapse: collapse;
+        margin-bottom: 20px;
     }
 
         .voucher-table th, .voucher-table td, .line-items-table th, .line-items-table td {
-            border: 1px solid #ddd;
+            border: 1px solid #ccc;
             padding: 8px;
-            text-align: left;
         }
 
-        .voucher-table th, .line-items-table th {
-            background-color: #f2f2f2;
-        }
-
-        .voucher-table td, .line-items-table td {
-            text-overflow: ellipsis;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-
-        .voucher-table td {
-            max-width: 150px;
-        }
-
-        .line-items-table td {
-            max-width: 300px;
+        .line-items-table input {
+            width: 100%;
         }
 </style>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-        $('#saveVoucherBtn').click(function (e) {
+    let lineItemIndex = @Model.LineItems?.Count ?? 0;
+
+    function addLineItem() {
+        const tbody = $("#line-items-table tbody");
+        const rowHtml = `
+            <tr>
+                <td><input name="LineItems[${lineItemIndex}].Details" /></td>
+                <td><input type="number" step="0.01" name="LineItems[${lineItemIndex}].Amount" /></td>
+                <td><button type="button" onclick="removeLineItem(this)">Remove</button></td>
+            </tr>`;
+        tbody.append(rowHtml);
+        lineItemIndex++;
+    }
+
+    function removeLineItem(button) {
+        $(button).closest("tr").remove();
+        // Optional: Renumbering can be added here if needed
+    }
+
+    $("#voucherForm").submit(function (e) {
         e.preventDefault();
-
-        const formData = $('form').serialize(); // Serialize form data
-
+        const formData = $(this).serialize();
         $.ajax({
             url: '/Invoice/Save',
             method: 'POST',
@@ -179,42 +189,7 @@
             },
             error: function (xhr) {
                 alert('Error saving voucher: ' + xhr.responseText);
-                console.error(xhr);
             }
         });
     });
-
-
-    // Log the entire model data to see if LineItems are available
-    console.log('PettyCashVoucher model:', @Html.Raw(Json.Serialize(Model)));
-
-    // Check if the line items are being passed to the view
-    if (Model.LineItems && Model.LineItems.length > 0) {
-        console.log('Line items found:', Model.LineItems);
-    } else {
-        console.log('No line items found.');
-    }
-
-           let lineItemIndex = @Model.LineItems?.Count ?? 0;
-
-    function addLineItem() {
-        const table = document.getElementById("line-items-table").getElementsByTagName('tbody')[0];
-
-        const row = table.insertRow();
-        row.innerHTML = `
-            <td><input type="date" name="LineItems[${lineItemIndex}].ItemDate" /></td>
-            <td><input type="text" name="LineItems[${lineItemIndex}].Description" /></td>
-            <td><input type="number" name="LineItems[${lineItemIndex}].Amount" step="0.01" /></td>
-            <td><button type="button" onclick="removeLineItem(this)">Remove</button></td>
-        `;
-
-        lineItemIndex++; // Increment index for the next added row
-    }
-
-
-
-
-    function removeLineItem(button) {
-        button.closest("tr").remove();
-    }
 </script>

@@ -8,9 +8,7 @@
             <th>Voucher No</th>
             <th>Paid To</th>
             <th>Date</th>
-            <th>Email</th>
-            <th>Contact No</th>
-            <th>Total Amount</th> <!-- Add this -->
+            <th>Total Amount</th> 
             <th>Actions</th>
         </tr>
     </thead>
@@ -21,8 +19,6 @@
                 <td>@voucher.VoucherNo</td>
                 <td>@voucher.PaidTo</td>
                 <td>@voucher.Date</td>
-                <td>@voucher.Email</td>
-                <td>@voucher.ContactNo</td>
                 <td>
                     @(voucher.LineItems != null ? voucher.LineItems.Sum(i => i.Amount).ToString("N2") : "0.00")
                 </td>
@@ -31,7 +27,7 @@
                     <ul>
                         @foreach (var item in voucher.LineItems)
                         {
-                            <li>@item.ItemDate - @item.Description - @item.Amount.ToString("N2")</li>
+                            <li>@item.Details - @item.Amount.ToString("N2")</li>
                         }
                     </ul>
                 </td>

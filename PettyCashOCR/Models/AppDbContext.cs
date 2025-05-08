@@ -1,25 +1,23 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PettyCashOCR.Models;
 
-namespace PettyCashOCR.Models
+namespace PettyCashOCR.Data
 {
     public class AppDbContext : DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
-
         public DbSet<PettyCashVoucher> PettyCashVouchers { get; set; }
         public DbSet<VoucherLineItem> VoucherLineItems { get; set; }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        public DbSet<BudgeteryDetails> BudgeteryDetails { get; set; }
+        public DbSet<AccountingAllocation> AccountingAllocations { get; set; }
+
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+
+        // Example method to execute a raw SQL query
+        public async Task<List<PettyCashVoucher>> GetVouchersAsync()
         {
-            modelBuilder.Entity<PettyCashVoucher>()
-                .Property(v => v.TotalAmount)
-                .HasColumnType("decimal(18,2)");
-
-            modelBuilder.Entity<VoucherLineItem>()
-                .Property(v => v.Amount)
-                .HasColumnType("decimal(18,2)");
+            return await PettyCashVouchers
+                .FromSqlRaw("SELECT * FROM PettyCashVoucher")
+                .ToListAsync();
         }
-
-        // Add OnModelCreating if you need to configure relationships or table names
     }
-
 }

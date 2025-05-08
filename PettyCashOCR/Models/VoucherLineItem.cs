@@ -14,10 +14,7 @@ namespace PettyCashOCR.Models
         public int VoucherId { get; set; }
 
         [Required]
-        public string ItemDate { get; set; }
-
-        [Required]
-        public string Description { get; set; }
+        public string Details { get; set; }
 
         [Required]
         public decimal Amount { get; set; }

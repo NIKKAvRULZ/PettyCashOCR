@@ -13,19 +13,31 @@ namespace PettyCashOCR.Models
         [Display(Name = "Paid To")]
         public string? PaidTo { get; set; }
 
+        public string? StaffNo { get; set; }
+
+        public string? Department { get; set; }
+
+        public string? CostCenter { get; set; }
+
+        public string? Station { get; set; }
+
         public string? Date { get; set; }
 
         public string? VoucherNo { get; set; }
 
-        public string? Email { get; set; }
+        public string? AmountInWords { get; set; }
 
-        public string? ContactNo { get; set; }
+        public string? ApprovedBy { get; set; }
+
+        public string? ReceivedCash { get; set; }
 
         [Required]
         public decimal TotalAmount { get; set; }
 
         // Navigation property
         public List<VoucherLineItem>? LineItems { get; set; }  // Changed from ICollection<>
-    }
+        public List<BudgeteryDetails>? BudgeteryDetails { get; set; }  // Changed from ICollection<>
+        public List<AccountingAllocation> AccountingAllocations { get; set; } // Changed from ICollection<>
 
+    }
 }
