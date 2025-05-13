@@ -7,6 +7,8 @@ namespace PettyCashOCR.Models
     {
 
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // <- this line is important
+
         public int Id { get; set; }
 
         [ForeignKey("PettyCashVoucher")]

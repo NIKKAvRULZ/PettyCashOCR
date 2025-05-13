@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using PettyCashOCR.Data;
 using PettyCashOCR.Models;
 
 var builder = WebApplication.CreateBuilder(args);
