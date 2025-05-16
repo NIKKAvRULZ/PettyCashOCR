@@ -9,7 +9,6 @@ using System.Linq;
 using System.IO;
 using System;
 using Microsoft.AspNetCore.Http;
-using System.Globalization;
 using PettyCashOCR.Data;
 
 namespace PettyCashOCR.Controllers
@@ -43,6 +42,8 @@ namespace PettyCashOCR.Controllers
                         invoiceImage.CopyTo(stream);
 
                     string extractedText = ExtractTextFromImage(filePath);
+                    Console.WriteLine("Extracted OCR Text:\n"+ extractedText);
+
                     var (voucherData, lineItems, budgetDetails, accountingAllocations) = ParseInvoiceData(extractedText);
 
                     var voucher = new PettyCashVoucher
@@ -65,7 +66,7 @@ namespace PettyCashOCR.Controllers
 
                     return View("Edit", voucher);
                 }
-                catch (Exception ex)
+                catch (Exception ex) 
                 {
                     ModelState.AddModelError("", $"Error processing invoice: {ex.Message}");
                 }
@@ -84,7 +85,7 @@ namespace PettyCashOCR.Controllers
             return page.GetText();
         }
 
-        private (PettyCashVoucher VoucherData, List<VoucherLineItem>, List<BudgeteryDetails>, List<AccountingAllocation>) ParseInvoiceData(string text)
+        private (PettyCashVoucher, List<VoucherLineItem>, List<BudgeteryDetails>, List<AccountingAllocation>) ParseInvoiceData(string text)
         {
             var voucher = new PettyCashVoucher
             {
@@ -166,84 +167,11 @@ namespace PettyCashOCR.Controllers
         {
             var voucher = _context.PettyCashVouchers
                                   .Include(v => v.LineItems)
+                                  .Include(v => v.BudgeteryDetails)
+                                  .Include(v => v.AccountingAllocations)
                                   .FirstOrDefault(v => v.Id == id);
             return voucher == null ? NotFound() : View(voucher);
         }
-
-        [HttpPost]
-        public IActionResult Edit(PettyCashVoucher voucher)
-        {
-            if (ModelState.IsValid)
-            {
-                voucher.LineItems = voucher.LineItems ?? new List<VoucherLineItem>();
-                voucher.TotalAmount = voucher.LineItems.Sum(i => i.Amount);
-
-                if (voucher.Id == 0)
-                {
-                    // Insert voucher
-                    _context.Database.ExecuteSqlInterpolated($@"
-                INSERT INTO PettyCashVouchers 
-                (PaidTo, StaffNo, Department, CostCenter, Station, Date, VoucherNo, AmountInWords, ApprovedBy, ReceivedCash, TotalAmount)
-                VALUES 
-                ({voucher.PaidTo}, {voucher.StaffNo}, {voucher.Department}, {voucher.CostCenter}, {voucher.Station},
-                 {voucher.Date}, {voucher.VoucherNo}, {voucher.AmountInWords}, {voucher.ApprovedBy}, {voucher.ReceivedCash}, {voucher.TotalAmount});
-            ");
-
-                    // Get last inserted ID
-                    var lastVoucherId = _context.PettyCashVouchers
-                                                .OrderByDescending(v => v.Id)
-                                                .Select(v => v.Id)
-                                                .FirstOrDefault();
-
-                    foreach (var item in voucher.LineItems)
-                    {
-                        _context.Database.ExecuteSqlInterpolated($@"
-                    INSERT INTO VoucherLineItems (VoucherId, Details, Amount)
-                    VALUES ({lastVoucherId}, {item.Details}, {item.Amount});
-                ");
-                    }
-                }
-                else
-                {
-                    // Update voucher
-                    _context.Database.ExecuteSqlInterpolated($@"
-                UPDATE PettyCashVouchers
-                SET PaidTo = {voucher.PaidTo},
-                    StaffNo = {voucher.StaffNo},
-                    Department = {voucher.Department},
-                    CostCenter = {voucher.CostCenter},
-                    Station = {voucher.Station},
-                    Date = {voucher.Date},
-                    VoucherNo = {voucher.VoucherNo},
-                    AmountInWords = {voucher.AmountInWords},
-                    ApprovedBy = {voucher.ApprovedBy},
-                    ReceivedCash = {voucher.ReceivedCash},
-                    TotalAmount = {voucher.TotalAmount}
-                WHERE Id = {voucher.Id};
-            ");
-
-                    // Delete old items
-                    _context.Database.ExecuteSqlInterpolated($@"
-                DELETE FROM VoucherLineItems WHERE VoucherId = {voucher.Id};
-            ");
-
-                    // Re-insert line items
-                    foreach (var item in voucher.LineItems)
-                    {
-                        _context.Database.ExecuteSqlInterpolated($@"
-                    INSERT INTO VoucherLineItems (VoucherId, Details, Amount)
-                    VALUES ({voucher.Id}, {item.Details}, {item.Amount});
-                ");
-                    }
-                }
-
-                TempData["Success"] = "Voucher saved successfully!";
-                return RedirectToAction("List");
-            }
-
-            return View(voucher);
-        }
-
 
         [HttpPost]
         public IActionResult Save(PettyCashVoucher model)
@@ -251,43 +179,39 @@ namespace PettyCashOCR.Controllers
             if (ModelState.IsValid)
             {
                 model.TotalAmount = model.LineItems?.Sum(i => i.Amount) ?? 0;
-
                 var exists = _context.PettyCashVouchers.Any(v => v.Id == model.Id);
 
                 if (exists)
                 {
-                    // Delete old line items
                     _context.Database.ExecuteSqlInterpolated($@"
-                DELETE FROM VoucherLineItems WHERE VoucherId = {model.Id};
-            ");
+                        DELETE FROM VoucherLineItems WHERE VoucherId = {model.Id};
+                        DELETE FROM BudgeteryDetails WHERE VoucherId = {model.Id};
+                        DELETE FROM AccountingAllocation WHERE VoucherId = {model.Id};
 
-                    // Update main voucher
-                    _context.Database.ExecuteSqlInterpolated($@"
-                UPDATE PettyCashVouchers
-                SET PaidTo = {model.PaidTo},
-                    StaffNo = {model.StaffNo},
-                    Department = {model.Department},
-                    CostCenter = {model.CostCenter},
-                    Station = {model.Station},
-                    Date = {model.Date},
-                    VoucherNo = {model.VoucherNo},
-                    AmountInWords = {model.AmountInWords},
-                    ApprovedBy = {model.ApprovedBy},
-                    ReceivedCash = {model.ReceivedCash},
-                    TotalAmount = {model.TotalAmount}
-                WHERE Id = {model.Id};
-            ");
+                        UPDATE PettyCashVouchers SET
+                            PaidTo = {model.PaidTo},
+                            StaffNo = {model.StaffNo},
+                            Department = {model.Department},
+                            CostCenter = {model.CostCenter},
+                            Station = {model.Station},
+                            Date = {model.Date},
+                            VoucherNo = {model.VoucherNo},
+                            AmountInWords = {model.AmountInWords},
+                            ApprovedBy = {model.ApprovedBy},
+                            ReceivedCash = {model.ReceivedCash},
+                            TotalAmount = {model.TotalAmount}
+                        WHERE Id = {model.Id};
+                    ");
                 }
                 else
                 {
-                    // Insert new voucher
                     _context.Database.ExecuteSqlInterpolated($@"
-                INSERT INTO dbo.PettyCashVouchers
-                (PaidTo, StaffNo, Department, CostCenter, Station, Date, VoucherNo, AmountInWords, ApprovedBy, ReceivedCash, TotalAmount)
-                VALUES
-                ({model.PaidTo}, {model.StaffNo}, {model.Department}, {model.CostCenter}, {model.Station},
-                 {model.Date}, {model.VoucherNo}, {model.AmountInWords}, {model.ApprovedBy}, {model.ReceivedCash}, {model.TotalAmount});
-            ");
+                        INSERT INTO PettyCashVouchers
+                        (PaidTo, StaffNo, Department, CostCenter, Station, Date, VoucherNo, AmountInWords, ApprovedBy, ReceivedCash, TotalAmount)
+                        VALUES
+                        ({model.PaidTo}, {model.StaffNo}, {model.Department}, {model.CostCenter}, {model.Station},
+                        {model.Date}, {model.VoucherNo}, {model.AmountInWords}, {model.ApprovedBy}, {model.ReceivedCash}, {model.TotalAmount});
+                    ");
 
                     model.Id = _context.PettyCashVouchers
                                        .OrderByDescending(v => v.Id)
@@ -295,35 +219,27 @@ namespace PettyCashOCR.Controllers
                                        .FirstOrDefault();
                 }
 
-                // Insert line items
                 foreach (var item in model.LineItems)
                 {
                     _context.Database.ExecuteSqlInterpolated($@"
-                INSERT INTO VoucherLineItems (VoucherId, Details, Amount)
-                VALUES ({model.Id}, {item.Details}, {item.Amount});
-            ");
+                        INSERT INTO VoucherLineItems (VoucherId, Details, Amount)
+                        VALUES ({model.Id}, {item.Details}, {item.Amount});
+                    ");
                 }
 
-                foreach (var Budget in model.BudgeteryDetails)
+                foreach (var budget in model.BudgeteryDetails ?? new List<BudgeteryDetails>())
                 {
                     _context.Database.ExecuteSqlInterpolated($@"
-                INSERT INTO BudgeteryDetails (VoucherId, Account, CC, Budget, Utilised, Variance, ThisPayment)
-                VALUES ({model.Id}, {Budget.Account}, {Budget.CC}, {Budget.Budget}, {Budget.Utilised}, {Budget.Variance}, {Budget.ThisPayment})
-            ");
+                        INSERT INTO BudgeteryDetails (VoucherId, Account, CC, Budget, Utilised, Variance, ThisPayment)
+                        VALUES ({model.Id}, {budget.Account}, {budget.CC}, {budget.Budget}, {budget.Utilised}, {budget.Variance}, {budget.ThisPayment});
+                    ");
                 }
 
-                foreach (var Acc in model.AccountingAllocations)
+                foreach (var acc in model.AccountingAllocations ?? new List<AccountingAllocation>())
                 {
-                    if (string.IsNullOrEmpty(Acc.Account) || string.IsNullOrEmpty(Acc.CC) || string.IsNullOrEmpty(Acc.Amount) ||
-                        string.IsNullOrEmpty(Acc.FLTNO) || string.IsNullOrEmpty(Acc.ACRFT) || string.IsNullOrEmpty(Acc.PROJ) ||
-                        string.IsNullOrEmpty(Acc.CrossReference) || string.IsNullOrEmpty(Acc.Description))
-                    {
-                        throw new InvalidOperationException("One or more required fields in AccountingAllocation are null or empty.");
-                    }
-
                     _context.Database.ExecuteSqlInterpolated($@"
                         INSERT INTO AccountingAllocation (VoucherId, Account, CC, FLTNO, ACRFT, PROJ, Amount, CrossReference, Description)
-                        VALUES ({model.Id}, {Acc.Account}, {Acc.CC}, {Acc.FLTNO}, {Acc.ACRFT}, {Acc.PROJ}, {Acc.Amount}, {Acc.CrossReference}, {Acc.Description});
+                        VALUES ({model.Id}, {acc.Account}, {acc.CC}, {acc.FLTNO}, {acc.ACRFT}, {acc.PROJ}, {acc.Amount}, {acc.CrossReference}, {acc.Description});
                     ");
                 }
 
@@ -333,8 +249,5 @@ namespace PettyCashOCR.Controllers
 
             return View("Edit", model);
         }
-
-
     }
 }
-

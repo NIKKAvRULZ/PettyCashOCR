@@ -1092,8 +1092,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>hgo4xruv42</Fingerprint>
-      <Integrity>L/7VcdmC7u64lNwnsYCC2Xa0Nmhxi2JSvoZmNTQNwxw=</Integrity>
+      <Fingerprint>gj9xtczh2l</Fingerprint>
+      <Integrity>dPSJnVi5LbfDC1Bj0Xs8XjIyzlfr2hBOnE4dnNCXObQ=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\PettyCash.png'))</OriginalItemSpec>

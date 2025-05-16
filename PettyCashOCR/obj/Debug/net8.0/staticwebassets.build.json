@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "EHRVCW7r8md6cxxGxGR7Hlq+ZhQSsO+G0KX1FfdguEA=",
+  "Hash": "AVDybJZ8mZqhPL+vjleh5AuDzUI9oTIJUkSetHDIJIY=",
   "Source": "PettyCashOCR",
   "BasePath": "_content/PettyCashOCR",
   "Mode": "Default",
@@ -1291,8 +1291,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "hgo4xruv42",
-      "Integrity": "L/7VcdmC7u64lNwnsYCC2Xa0Nmhxi2JSvoZmNTQNwxw=",
+      "Fingerprint": "gj9xtczh2l",
+      "Integrity": "dPSJnVi5LbfDC1Bj0Xs8XjIyzlfr2hBOnE4dnNCXObQ=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\PettyCash.png"
@@ -6262,7 +6262,7 @@
       ]
     },
     {
-      "Route": "uploads/PettyCash.hgo4xruv42.png",
+      "Route": "uploads/PettyCash.gj9xtczh2l.png",
       "AssetFile": "C:\\Users\\ASUS\\Documents\\GitHub\\PettyCashOCR\\PettyCashOCR\\wwwroot\\uploads\\PettyCash.png",
       "Selectors": [],
       "ResponseHeaders": [
@@ -6272,7 +6272,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "93104"
+          "Value": "1088644"
         },
         {
           "Name": "Content-Type",
@@ -6280,11 +6280,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"L/7VcdmC7u64lNwnsYCC2Xa0Nmhxi2JSvoZmNTQNwxw=\""
+          "Value": "\"dPSJnVi5LbfDC1Bj0Xs8XjIyzlfr2hBOnE4dnNCXObQ=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 07 May 2025 04:12:34 GMT"
+          "Value": "Thu, 15 May 2025 05:03:52 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6294,7 +6294,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "hgo4xruv42"
+          "Value": "gj9xtczh2l"
         },
         {
           "Name": "label",
@@ -6302,7 +6302,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-L/7VcdmC7u64lNwnsYCC2Xa0Nmhxi2JSvoZmNTQNwxw="
+          "Value": "sha256-dPSJnVi5LbfDC1Bj0Xs8XjIyzlfr2hBOnE4dnNCXObQ="
         }
       ]
     },
@@ -6317,7 +6317,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "93104"
+          "Value": "1088644"
         },
         {
           "Name": "Content-Type",
@@ -6325,11 +6325,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"L/7VcdmC7u64lNwnsYCC2Xa0Nmhxi2JSvoZmNTQNwxw=\""
+          "Value": "\"dPSJnVi5LbfDC1Bj0Xs8XjIyzlfr2hBOnE4dnNCXObQ=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 07 May 2025 04:12:34 GMT"
+          "Value": "Thu, 15 May 2025 05:03:52 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6339,7 +6339,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-L/7VcdmC7u64lNwnsYCC2Xa0Nmhxi2JSvoZmNTQNwxw="
+          "Value": "sha256-dPSJnVi5LbfDC1Bj0Xs8XjIyzlfr2hBOnE4dnNCXObQ="
         }
       ]
     },
@@ -6366,7 +6366,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 13 May 2025 13:11:23 GMT"
+          "Value": "Thu, 15 May 2025 05:01:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6403,7 +6403,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 13 May 2025 13:11:23 GMT"
+          "Value": "Thu, 15 May 2025 05:01:42 GMT"
         },
         {
           "Name": "Cache-Control",
