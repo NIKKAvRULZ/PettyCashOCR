@@ -58,6 +58,8 @@ wwwroot\lib\jquery-validation\LICENSE.md
 wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js
 wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js
 wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt
+wwwroot\uploads\PettyCash (1).png
 wwwroot\uploads\PettyCash.png
 wwwroot\uploads\PettyCashVoucher-1.png
 wwwroot\uploads\voucher.png
+wwwroot\uploads\ආ.png

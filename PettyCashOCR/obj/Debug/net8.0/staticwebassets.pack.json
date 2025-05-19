@@ -241,6 +241,10 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
+      "Id": "C:\\Users\\ASUS\\Documents\\GitHub\\PettyCashOCR\\PettyCashOCR\\wwwroot\\uploads\\PettyCash (1).png",
+      "PackagePath": "staticwebassets\\uploads\\PettyCash (1).png"
+    },
+    {
       "Id": "C:\\Users\\ASUS\\Documents\\GitHub\\PettyCashOCR\\PettyCashOCR\\wwwroot\\uploads\\PettyCash.png",
       "PackagePath": "staticwebassets\\uploads\\PettyCash.png"
     },
@@ -251,6 +255,10 @@
     {
       "Id": "C:\\Users\\ASUS\\Documents\\GitHub\\PettyCashOCR\\PettyCashOCR\\wwwroot\\uploads\\voucher.png",
       "PackagePath": "staticwebassets\\uploads\\voucher.png"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\Documents\\GitHub\\PettyCashOCR\\PettyCashOCR\\wwwroot\\uploads\\ආ.png",
+      "PackagePath": "staticwebassets\\uploads\\ආ.png"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.PettyCashOCR.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",

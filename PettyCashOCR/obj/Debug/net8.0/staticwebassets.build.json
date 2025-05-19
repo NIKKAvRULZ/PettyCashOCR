@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "AVDybJZ8mZqhPL+vjleh5AuDzUI9oTIJUkSetHDIJIY=",
+  "Hash": "++gHdTBdsP1+twBy44H9ICAbdm6AlqCy9S3o8oDZ9kw=",
   "Source": "PettyCashOCR",
   "BasePath": "_content/PettyCashOCR",
   "Mode": "Default",
@@ -1277,6 +1277,27 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
     },
     {
+      "Identity": "C:\\Users\\ASUS\\Documents\\GitHub\\PettyCashOCR\\PettyCashOCR\\wwwroot\\uploads\\PettyCash (1).png",
+      "SourceId": "PettyCashOCR",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ASUS\\Documents\\GitHub\\PettyCashOCR\\PettyCashOCR\\wwwroot\\",
+      "BasePath": "_content/PettyCashOCR",
+      "RelativePath": "uploads/PettyCash (1)#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "7dish8kl5v",
+      "Integrity": "+5yW4Ml7VyxSNkxYKjT6BJs0TK5m/poUJFucwLo4IGo=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\PettyCash (1).png"
+    },
+    {
       "Identity": "C:\\Users\\ASUS\\Documents\\GitHub\\PettyCashOCR\\PettyCashOCR\\wwwroot\\uploads\\PettyCash.png",
       "SourceId": "PettyCashOCR",
       "SourceType": "Discovered",
@@ -1291,8 +1312,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "gj9xtczh2l",
-      "Integrity": "dPSJnVi5LbfDC1Bj0Xs8XjIyzlfr2hBOnE4dnNCXObQ=",
+      "Fingerprint": "8awlze3ss7",
+      "Integrity": "sMHZk76jKhwxrgpeFc8KBpXBV+6WDwb7SaOoo5IdJn0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\PettyCash.png"
@@ -1338,6 +1359,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\voucher.png"
+    },
+    {
+      "Identity": "C:\\Users\\ASUS\\Documents\\GitHub\\PettyCashOCR\\PettyCashOCR\\wwwroot\\uploads\\ආ.png",
+      "SourceId": "PettyCashOCR",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ASUS\\Documents\\GitHub\\PettyCashOCR\\PettyCashOCR\\wwwroot\\",
+      "BasePath": "_content/PettyCashOCR",
+      "RelativePath": "uploads/ආ#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ec4yfttun2",
+      "Integrity": "fp2cHjczg/E5A+DZNhLa9zf3F+GV333XxV6RIsGyb98=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\ආ.png"
     }
   ],
   "Endpoints": [
@@ -6262,8 +6304,8 @@
       ]
     },
     {
-      "Route": "uploads/PettyCash.gj9xtczh2l.png",
-      "AssetFile": "C:\\Users\\ASUS\\Documents\\GitHub\\PettyCashOCR\\PettyCashOCR\\wwwroot\\uploads\\PettyCash.png",
+      "Route": "uploads/PettyCash (1).7dish8kl5v.png",
+      "AssetFile": "C:\\Users\\ASUS\\Documents\\GitHub\\PettyCashOCR\\PettyCashOCR\\wwwroot\\uploads\\PettyCash (1).png",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6272,7 +6314,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1088644"
+          "Value": "994099"
         },
         {
           "Name": "Content-Type",
@@ -6280,11 +6322,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"dPSJnVi5LbfDC1Bj0Xs8XjIyzlfr2hBOnE4dnNCXObQ=\""
+          "Value": "\"+5yW4Ml7VyxSNkxYKjT6BJs0TK5m/poUJFucwLo4IGo=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 15 May 2025 05:03:52 GMT"
+          "Value": "Fri, 16 May 2025 06:46:23 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6294,7 +6336,89 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "gj9xtczh2l"
+          "Value": "7dish8kl5v"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/PettyCash (1).png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-+5yW4Ml7VyxSNkxYKjT6BJs0TK5m/poUJFucwLo4IGo="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/PettyCash (1).png",
+      "AssetFile": "C:\\Users\\ASUS\\Documents\\GitHub\\PettyCashOCR\\PettyCashOCR\\wwwroot\\uploads\\PettyCash (1).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "994099"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+5yW4Ml7VyxSNkxYKjT6BJs0TK5m/poUJFucwLo4IGo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 16 May 2025 06:46:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-+5yW4Ml7VyxSNkxYKjT6BJs0TK5m/poUJFucwLo4IGo="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/PettyCash.8awlze3ss7.png",
+      "AssetFile": "C:\\Users\\ASUS\\Documents\\GitHub\\PettyCashOCR\\PettyCashOCR\\wwwroot\\uploads\\PettyCash.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "982196"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"sMHZk76jKhwxrgpeFc8KBpXBV+6WDwb7SaOoo5IdJn0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 16 May 2025 06:08:02 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "8awlze3ss7"
         },
         {
           "Name": "label",
@@ -6302,7 +6426,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-dPSJnVi5LbfDC1Bj0Xs8XjIyzlfr2hBOnE4dnNCXObQ="
+          "Value": "sha256-sMHZk76jKhwxrgpeFc8KBpXBV+6WDwb7SaOoo5IdJn0="
         }
       ]
     },
@@ -6317,7 +6441,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1088644"
+          "Value": "982196"
         },
         {
           "Name": "Content-Type",
@@ -6325,11 +6449,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"dPSJnVi5LbfDC1Bj0Xs8XjIyzlfr2hBOnE4dnNCXObQ=\""
+          "Value": "\"sMHZk76jKhwxrgpeFc8KBpXBV+6WDwb7SaOoo5IdJn0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 15 May 2025 05:03:52 GMT"
+          "Value": "Fri, 16 May 2025 06:08:02 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6339,7 +6463,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-dPSJnVi5LbfDC1Bj0Xs8XjIyzlfr2hBOnE4dnNCXObQ="
+          "Value": "sha256-sMHZk76jKhwxrgpeFc8KBpXBV+6WDwb7SaOoo5IdJn0="
         }
       ]
     },
@@ -6504,6 +6628,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-0YgpvYM7RsK82uD9L/xd07KNp1ggtde5BlkiXzQN93M="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/ආ.ec4yfttun2.png",
+      "AssetFile": "C:\\Users\\ASUS\\Documents\\GitHub\\PettyCashOCR\\PettyCashOCR\\wwwroot\\uploads\\ආ.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "982523"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"fp2cHjczg/E5A+DZNhLa9zf3F+GV333XxV6RIsGyb98=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 16 May 2025 06:01:15 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ec4yfttun2"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/ආ.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-fp2cHjczg/E5A+DZNhLa9zf3F+GV333XxV6RIsGyb98="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/ආ.png",
+      "AssetFile": "C:\\Users\\ASUS\\Documents\\GitHub\\PettyCashOCR\\PettyCashOCR\\wwwroot\\uploads\\ආ.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "982523"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"fp2cHjczg/E5A+DZNhLa9zf3F+GV333XxV6RIsGyb98=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 16 May 2025 06:01:15 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-fp2cHjczg/E5A+DZNhLa9zf3F+GV333XxV6RIsGyb98="
         }
       ]
     }
