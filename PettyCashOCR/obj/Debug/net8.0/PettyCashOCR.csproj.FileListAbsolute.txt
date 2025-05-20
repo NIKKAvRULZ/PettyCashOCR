@@ -349,3 +349,5 @@ C:\Users\ASUS\Documents\GitHub\PettyCashOCR\PettyCashOCR\obj\Debug\net8.0\refint
 C:\Users\ASUS\Documents\GitHub\PettyCashOCR\PettyCashOCR\obj\Debug\net8.0\PettyCashOCR.pdb
 C:\Users\ASUS\Documents\GitHub\PettyCashOCR\PettyCashOCR\obj\Debug\net8.0\PettyCashOCR.genruntimeconfig.cache
 C:\Users\ASUS\Documents\GitHub\PettyCashOCR\PettyCashOCR\obj\Debug\net8.0\ref\PettyCashOCR.dll
+C:\Users\ASUS\Documents\GitHub\PettyCashOCR\PettyCashOCR\bin\Debug\net8.0\libman.json
+C:\Users\ASUS\Documents\GitHub\PettyCashOCR\PettyCashOCR\bin\Debug\net8.0\Python.Runtime.dll

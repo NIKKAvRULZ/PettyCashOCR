@@ -241,6 +241,10 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
+      "Id": "C:\\Users\\ASUS\\Documents\\GitHub\\PettyCashOCR\\PettyCashOCR\\wwwroot\\uploads\\DOC220425-22042025143520-0001_page-0001.jpg",
+      "PackagePath": "staticwebassets\\uploads\\DOC220425-22042025143520-0001_page-0001.jpg"
+    },
+    {
       "Id": "C:\\Users\\ASUS\\Documents\\GitHub\\PettyCashOCR\\PettyCashOCR\\wwwroot\\uploads\\PettyCash (1).png",
       "PackagePath": "staticwebassets\\uploads\\PettyCash (1).png"
     },
