@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PettyCashOCR")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+70aa7df17dfed05e8089ff82cec5fcee044b7914")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+aae124da4d3735d0629a2ea0a05463ba562efc59")]
 [assembly: System.Reflection.AssemblyProductAttribute("PettyCashOCR")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PettyCashOCR")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

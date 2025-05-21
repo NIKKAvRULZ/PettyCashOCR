@@ -21,4 +21,9 @@
     <Folder Include="wwwroot\uploads\" />
   </ItemGroup>
 
+    <ItemGroup>
+		<Content Include="Scripts\paddle_ocr_runner.py">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
 </Project>

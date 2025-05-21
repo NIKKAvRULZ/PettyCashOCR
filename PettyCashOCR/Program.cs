@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using PettyCashOCR.Data;
-using PettyCashOCR.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,8 +13,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
 app.UseStaticFiles();
 app.UseRouting();
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Invoice}/{action=Upload}/{id?}");

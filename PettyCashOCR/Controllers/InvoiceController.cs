@@ -11,6 +11,8 @@ using System;
 using Microsoft.AspNetCore.Http;
 using PettyCashOCR.Data;
 using Python.Runtime;
+using static System.Formats.Asn1.AsnWriter;
+using System.Diagnostics;
 
 namespace PettyCashOCR.Controllers
 {
@@ -42,11 +44,15 @@ namespace PettyCashOCR.Controllers
                     using (var stream = new FileStream(filePath, FileMode.Create))
                         invoiceImage.CopyTo(stream);
 
+                    // Call your Python PaddleOCR script via ExtractTextFromImage method
                     string extractedText = ExtractTextFromImage(filePath);
-                    Console.WriteLine("Extracted OCR Text:\n"+ extractedText);
 
+                    Console.WriteLine("Extracted OCR Text:\n" + extractedText);
+
+                    // Use existing parser to get structured data from extracted text
                     var (voucherData, lineItems, budgetDetails, accountingAllocations) = ParseInvoiceData(extractedText);
 
+                    // Map parsed data to your voucher model
                     var voucher = new PettyCashVoucher
                     {
                         PaidTo = voucherData.PaidTo,
@@ -65,9 +71,10 @@ namespace PettyCashOCR.Controllers
                         AccountingAllocations = accountingAllocations
                     };
 
+                    // Show the Edit view so user can review/edit before saving
                     return View("Edit", voucher);
                 }
-                catch (Exception ex) 
+                catch (Exception ex)
                 {
                     ModelState.AddModelError("", $"Error processing invoice: {ex.Message}");
                 }
@@ -77,13 +84,66 @@ namespace PettyCashOCR.Controllers
             return View();
         }
 
+
         private string ExtractTextFromImage(string imagePath)
         {
-            var tessDataPath = Path.Combine(_env.ContentRootPath, "tessdata");
-            using var engine = new TesseractEngine(tessDataPath, "eng", EngineMode.Default);
-            using var img = Pix.LoadFromFile(imagePath);
-            using var page = engine.Process(img);
-            return page.GetText();
+            // Assuming _env.ContentRootPath points to PettyCashOCR project folder
+            var scriptPath = Path.Combine(_env.ContentRootPath, "Scripts", "paddle_ocr_runner.py");
+            Console.WriteLine($"Running OCR script: {scriptPath}");
+
+            var psi = new ProcessStartInfo
+            {
+                FileName = "python", // Ensure 'python' is in your system PATH
+                Arguments = $"\"{scriptPath}\" \"{imagePath}\"",
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+
+            using (var process = new Process())
+            {
+                process.StartInfo = psi;
+                process.Start();
+
+                string output = process.StandardOutput.ReadToEnd();
+                string error = process.StandardError.ReadToEnd();
+
+                process.WaitForExit();
+
+                if (!string.IsNullOrWhiteSpace(error))
+                {
+                    Console.WriteLine($"Python Error: {error}");
+                    // You can decide to throw here or continue depending on error severity
+                }
+
+                Console.WriteLine("Python Output: " + output);
+
+                try
+                {
+                    var json = System.Text.Json.JsonDocument.Parse(output);
+                    if (json.RootElement.TryGetProperty("text", out var textProp))
+                    {
+                        return textProp.GetString() ?? "No text found.";
+                    }
+                    else if (json.RootElement.TryGetProperty("error", out var errorProp))
+                    {
+                        throw new Exception(errorProp.GetString());
+                    }
+                    else
+                    {
+                        return "No text found in OCR output.";
+                    }
+                }
+                catch (System.Text.Json.JsonException)
+                {
+                    return "Failed to parse OCR output JSON.";
+                }
+                catch (Exception ex)
+                {
+                    return $"Error parsing OCR output: {ex.Message}";
+                }
+            }
         }
 
         private (PettyCashVoucher, List<VoucherLineItem>, List<BudgeteryDetails>, List<AccountingAllocation>) ParseInvoiceData(string text)
@@ -242,7 +302,7 @@ namespace PettyCashOCR.Controllers
 
                 UPDATE PettyCashVouchers SET
                     PaidTo = {model.PaidTo},
-                    StaffNo = {model.StaffNo},
+                    StaffNo = {model.StaffNo},  
                     Department = {model.Department},
                     CostCenter = {model.CostCenter},
                     Station = {model.Station},
